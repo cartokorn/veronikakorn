@@ -1,0 +1,330 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const werk = Astro.url.searchParams.get('werk') ?? '';
+const success = Astro.url.searchParams.get('success') === '1';
+---
+
+<Layout
+  title="Kontakt – Veronika Korn"
+  description="Kontakt für Kaufanfragen, Ausstellungen und Newsletter-Anmeldung."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Kontakt</h1>
+      <p class="subtitle">Anfragen zu Gemälden, Drucken und Ausstellungen</p>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Form -->
+        <div class="form-col">
+          {
+            success && (
+              <div class="success-banner" role="alert">
+                Vielen Dank für Ihre Nachricht. Ich melde mich bald bei Ihnen.
+              </div>
+            )
+          }
+
+          <!-- Replace the action URL with your Formspree endpoint or server-side handler -->
+          <form
+            class="form"
+            method="POST"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+          >
+            <div class="field">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Ihr Name"
+              />
+            </div>
+
+            <div class="field">
+              <label for="email">E-Mail</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="ihre@email.at"
+              />
+            </div>
+
+            <div class="field">
+              <label for="subject">Betreff</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={werk ? `Anfrage: ${werk}` : ''}
+                placeholder="Worum geht es?"
+              />
+            </div>
+
+            <div class="field">
+              <label for="message">Nachricht</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                placeholder="Ihre Nachricht…"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Nachricht senden</button>
+          </form>
+        </div>
+
+        <!-- Info sidebar -->
+        <aside class="info-col">
+          <div class="info-block">
+            <h2 class="info-label">Direkter Kontakt</h2>
+            <p>
+              <a href="mailto:atelier@vkorn.at" class="accent-link">atelier@vkorn.at</a>
+            </p>
+          </div>
+
+          <div class="info-block">
+            <h2 class="info-label">Instagram</h2>
+            <p>
+              <a
+                href="https://www.instagram.com/veronik_art_vie/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="accent-link"
+              >
+                @veronik_art_vie
+              </a>
+            </p>
+          </div>
+
+          <div class="info-block newsletter">
+            <h2 class="info-label">Newsletter</h2>
+            <p>Neue Werke, Ausstellungen, Ateliermomente — ein- bis zweimal im Monat.</p>
+            <!-- Replace action with your newsletter service endpoint -->
+            <form class="newsletter-form" method="POST" action="#">
+              <input
+                type="email"
+                name="email"
+                placeholder="Ihre E-Mail-Adresse"
+                required
+                class="newsletter-input"
+                aria-label="E-Mail für Newsletter"
+              />
+              <button type="submit" class="newsletter-btn">Anmelden</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+  }
+
+  .contact-section {
+    padding: 4rem 0 6rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 3fr 2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .success-banner {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    border-left: 3px solid #4caf50;
+  }
+
+  .form {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  input[type='text'],
+  input[type='email'],
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #bbb;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--text);
+  }
+
+  .btn-submit {
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    padding: 0.875rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s;
+    justify-self: start;
+  }
+
+  .btn-submit:hover {
+    background: #3a3a38;
+  }
+
+  .info-col {
+    display: grid;
+    gap: 0;
+  }
+
+  .info-block {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .info-block:first-child {
+    padding-top: 0;
+  }
+
+  .info-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.625rem;
+  }
+
+  .info-block p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .accent-link {
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .accent-link:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .newsletter {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .newsletter p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .newsletter-form {
+    display: flex;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    padding: 0.625rem 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-right: none;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    outline: none;
+    min-width: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .newsletter-input:focus {
+    border-color: var(--text);
+  }
+
+  .newsletter-btn {
+    padding: 0.625rem 1rem;
+    background: var(--text);
+    color: var(--bg);
+    border: 1px solid var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.25s;
+  }
+
+  .newsletter-btn:hover {
+    background: #3a3a38;
+  }
+</style>

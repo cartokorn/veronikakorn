@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArtworkCard from '../components/ArtworkCard.astro';
+import artworks from '../data/artworks.json';
+
+const featured = artworks.filter((a) => a.featured);
+const heroWork = featured[0];
+const gridWorks = artworks
+  .filter((a) => a.category === 'original')
+  .slice(0, 4);
+---
+
+<Layout
+  title="Veronika Korn – Malerin, Wien"
+  description="Ölgemälde und limitierte Drucke einer Wiener Malerin. Originale auf Leinwand und Holz."
+  ogImage={heroWork?.image}
+>
+  <!-- Hero -->
+  <section class="hero">
+    {
+      heroWork && (
+        <a href={`/works/${heroWork.id}`} class="hero-image-link" aria-label={heroWork.title}>
+          <img
+            src={heroWork.image}
+            alt={heroWork.title}
+            class="hero-image"
+            loading="eager"
+            fetchpriority="high"
+            width="1600"
+            height="1000"
+          />
+        </a>
+      )
+    }
+    <div class="hero-text">
+      <h1 class="hero-name">Veronika Korn</h1>
+      <p class="hero-statement">Ölgemälde aus Wien — Licht, Stille, Augenblicke.</p>
+      <a href="/gallery" class="hero-cta">Werke entdecken</a>
+    </div>
+  </section>
+
+  <!-- Selected Works -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ausgewählte Werke</h2>
+        <a href="/gallery" class="link-arrow">Alle Werke →</a>
+      </div>
+      <div class="grid">
+        {gridWorks.map((artwork) => <ArtworkCard artwork={artwork} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Artist Statement -->
+  <section class="statement-section">
+    <div class="container">
+      <div class="statement-inner">
+        <p class="statement-quote">
+          „Ich male, um Momente festzuhalten, die sonst vergehen — Licht, das sich verändert;
+          Stille, die in einem Motiv versteckt liegt."
+        </p>
+        <a href="/about" class="btn-outline">Über die Künstlerin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prints Teaser -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Limitierte Drucke</h2>
+        <a href="/prints" class="link-arrow">Alle Drucke →</a>
+      </div>
+      <p class="section-text">
+        Ausgewählte Motive als nummerierte, handsignierte Giclée-Drucke auf Hahnemühle Photo
+        Rag — für alle, die ein Stück mitnehmen möchten.
+      </p>
+      <a href="/prints" class="btn-outline" style="margin-top: 1.5rem; display: inline-block;"
+        >Drucke ansehen</a
+      >
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-image-link {
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .hero-image-link:hover .hero-image {
+    transform: scale(1.015);
+  }
+
+  .hero-text {
+    text-align: center;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-statement {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    border: 1px solid var(--text);
+    padding: 0.625rem 1.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      background 0.25s,
+      color 0.25s;
+  }
+
+  .hero-cta:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    gap: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .link-arrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .link-arrow:hover {
+    color: var(--text);
+  }
+
+  .section-text {
+    color: var(--text-muted);
+    max-width: 52ch;
+    line-height: 1.8;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem 1.5rem;
+    }
+  }
+
+  .statement-section {
+    padding: 5rem 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .statement-inner {
+    max-width: 56ch;
+  }
+
+  .statement-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--text);
+    padding: 0.625rem 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition:
+      background 0.25s,
+      color 0.25s;
+  }
+
+  .btn-outline:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+</style>

@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArtworkCard from '../components/ArtworkCard.astro';
+import artworks from '../data/artworks.json';
+
+const prints = artworks.filter((a) => a.category === 'print');
+---
+
+<Layout
+  title="Drucke – Veronika Korn"
+  description="Limitierte Giclée-Drucke von Veronika Korn. Nummeriert und handsigniert auf Hahnemühle."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Limitierte Drucke</h1>
+      <p class="subtitle">Giclée auf Hahnemühle Photo Rag — nummeriert und handsigniert</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="intro-text">
+        Ausgewählte Motive meiner Ölgemälde sind als limitierte Giclée-Drucke erhältlich. Jedes
+        Exemplar ist nummeriert, handsigniert und auf archivsicherem Hahnemühle Photo Rag gedruckt.
+        Die Auflagen sind bewusst klein gehalten.
+      </p>
+
+      {
+        prints.length > 0 ? (
+          <div class="prints-grid">
+            {prints.map((artwork) => (
+              <ArtworkCard artwork={artwork} />
+            ))}
+          </div>
+        ) : (
+          <p class="empty">Aktuell sind keine Drucke verfügbar. Bald mehr.</p>
+        )
+      }
+
+      <div class="order-info">
+        <h2>Bestellung &amp; Versand</h2>
+        <p>
+          Drucke werden auf Bestellung gefertigt und innerhalb von zwei Wochen versandt. Versand
+          innerhalb Österreichs und Deutschlands. Für Anfragen und Bestellungen schreiben Sie mir
+          gerne.
+        </p>
+        <a href="/contact" class="btn-outline">Anfrage senden</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+  }
+
+  .section {
+    padding: 4rem 0 6rem;
+  }
+
+  .intro-text {
+    max-width: 60ch;
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: 3rem;
+  }
+
+  .prints-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+    margin-bottom: 5rem;
+  }
+
+  @media (min-width: 640px) {
+    .prints-grid {
+      gap: 2.5rem 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .prints-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .empty {
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 4rem;
+  }
+
+  .order-info {
+    padding: 2.5rem;
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
+    max-width: 56ch;
+  }
+
+  .order-info h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .order-info p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--text);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition:
+      background 0.25s,
+      color 0.25s;
+  }
+
+  .btn-outline:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+</style>

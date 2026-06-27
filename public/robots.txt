@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vkorn.at/sitemap-index.xml

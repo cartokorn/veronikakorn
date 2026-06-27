@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import artworks from '../../data/artworks.json';
+
+export async function getStaticPaths() {
+  return artworks.map((artwork) => ({
+    params: { id: artwork.id },
+    props: { artwork },
+  }));
+}
+
+const { artwork } = Astro.props;
+
+const isSold = artwork.status === 'sold';
+const isPrint = artwork.category === 'print';
+const dimensions =
+  artwork.width_cm && artwork.height_cm
+    ? `${artwork.width_cm} × ${artwork.height_cm} cm`
+    : null;
+---
+
+<Layout
+  title={`${artwork.title} – Veronika Korn`}
+  description={artwork.description ??
+    `${artwork.title}${artwork.year ? ', ' + artwork.year : ''}. ${artwork.technique ?? ''}.`}
+  ogImage={artwork.image}
+>
+  <article class="work-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={isPrint ? '/prints' : '/gallery'}>← {isPrint ? 'Drucke' : 'Alle Werke'}</a>
+      </nav>
+
+      <div class="work-layout">
+        <!-- Image -->
+        <div class="work-image-col">
+          <img
+            src={artwork.image}
+            alt={artwork.title}
+            class="work-image"
+            loading="eager"
+            width={artwork.width_cm ? artwork.width_cm * 8 : 800}
+            height={artwork.height_cm ? artwork.height_cm * 8 : 1000}
+          />
+        </div>
+
+        <!-- Info -->
+        <div class="work-info-col">
+          <h1 class="work-title">{artwork.title}</h1>
+          {artwork.year && <p class="work-year">{artwork.year}</p>}
+
+          <dl class="work-specs">
+            {
+              artwork.technique && (
+                <>
+                  <dt>Technik</dt>
+                  <dd>{artwork.technique}</dd>
+                </>
+              )
+            }
+            {
+              dimensions && (
+                <>
+                  <dt>Format</dt>
+                  <dd>{dimensions}</dd>
+                </>
+              )
+            }
+            {
+              isPrint && artwork.edition_size && (
+                <>
+                  <dt>Auflage</dt>
+                  <dd>{artwork.edition_size} Exemplare</dd>
+                </>
+              )
+            }
+            {
+              artwork.price && artwork.currency && (
+                <>
+                  <dt>Preis</dt>
+                  <dd>
+                    {isSold
+                      ? 'Verkauft'
+                      : `${artwork.currency} ${artwork.price.toLocaleString('de-AT')}`}
+                  </dd>
+                </>
+              )
+            }
+            <dt>Status</dt>
+            <dd class:list={['status', { sold: isSold, available: !isSold }]}>
+              {isSold ? 'Verkauft' : 'Verfügbar'}
+            </dd>
+          </dl>
+
+          {
+            artwork.description && (
+              <p class="work-description">{artwork.description}</p>
+            )
+          }
+
+          {
+            !isSold && (
+              <a
+                href={`/contact?werk=${encodeURIComponent(artwork.title)}`}
+                class="btn-primary"
+              >
+                Anfrage senden
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .work-page {
+    padding: 3rem 0 6rem;
+  }
+
+  .breadcrumb {
+    margin-bottom: 2.5rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .breadcrumb a {
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--text);
+  }
+
+  .work-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .work-layout {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .work-layout {
+      grid-template-columns: 3fr 2fr;
+      gap: 5rem;
+    }
+  }
+
+  .work-image {
+    width: 100%;
+    display: block;
+  }
+
+  .work-title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    margin-bottom: 0.25rem;
+    line-height: 1.15;
+  }
+
+  .work-year {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  .work-specs {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 0.75rem 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.75rem;
+  }
+
+  .work-specs dt {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: 0.1rem;
+    align-self: start;
+  }
+
+  .work-specs dd {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .status.available {
+    color: #4a7c59;
+  }
+
+  .status.sold {
+    color: var(--text-muted);
+  }
+
+  .work-description {
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    padding: 0.875rem 2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background 0.25s;
+  }
+
+  .btn-primary:hover {
+    background: #3a3a38;
+  }
+</style>

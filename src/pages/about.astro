@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Über mich – Veronika Korn"
+  description="Biografie und Künstlerstatement von Veronika Korn, Malerin aus Wien."
+>
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-col">
+          <img
+            src="/images/about/portrait.jpg"
+            alt="Veronika Korn, Malerin"
+            class="portrait"
+            loading="lazy"
+            width="400"
+            height="500"
+          />
+        </div>
+
+        <div class="about-text-col">
+          <h1>Über mich</h1>
+
+          <div class="text-block">
+            <h2 class="block-label">Künstlerstatement</h2>
+            <p>
+              Ich male, um Momente festzuhalten, die sonst vergehen. Licht, das sich über Blätter
+              bewegt. Die Stille über einem See im frühen Morgen. Den Duft eines Marktplatzes, den
+              man in Farbe übersetzen kann.
+            </p>
+            <p>
+              Öl ist mein Medium, weil es lebt — weil es trocknet, sich schichtet, verändert. Ein
+              Gemälde entsteht nicht in Stunden, sondern über Wochen. Diese Langsamkeit ist das
+              Gegenteil unserer Zeit, und genau das macht sie wertvoll.
+            </p>
+            <p>
+              Wien ist mein Thema und mein Zuhause. Die Stadt liefert mir täglich Motive: Gassen im
+              Abendlicht, der Prater in allen Jahreszeiten, der Naschmarkt am frühen Morgen.
+            </p>
+          </div>
+
+          <div class="text-block">
+            <h2 class="block-label">Vita</h2>
+            <p>
+              Veronika Korn, geboren in Wien, arbeitet seit über fünfzehn Jahren als freischaffende
+              Malerin. Nach einem Studium an der Universität für angewandte Kunst Wien widmet sie
+              sich ausschließlich der Ölmalerei — vorwiegend landschaftlichen und atmosphärischen
+              Motiven aus dem Wiener Alltag und der österreichischen Natur.
+            </p>
+            <p>
+              Ihre Werke wurden in Galerien in Wien, Salzburg und München gezeigt. Sammlungen
+              befinden sich in Österreich, Deutschland und der Schweiz.
+            </p>
+            <p>
+              Atelier im 7. Bezirk, Wien.
+            </p>
+          </div>
+
+          <div class="contact-teaser">
+            <a href="/contact" class="btn-outline">Kontakt aufnehmen</a>
+            <a href="/exhibitions" class="link-muted">Ausstellungen ansehen →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-section {
+    padding: 4rem 0 6rem;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 5fr 8fr;
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .portrait {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .about-text-col h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 3rem;
+  }
+
+  .text-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .text-block:last-of-type {
+    border-bottom: none;
+  }
+
+  .block-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .text-block p {
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .text-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact-teaser {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--text);
+    padding: 0.625rem 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition:
+      background 0.25s,
+      color 0.25s;
+  }
+
+  .btn-outline:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .link-muted {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .link-muted:hover {
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,184 @@
+---
+const navLinks = [
+  { href: '/gallery', label: 'Werke' },
+  { href: '/prints', label: 'Drucke' },
+  { href: '/about', label: 'Über mich' },
+  { href: '/exhibitions', label: 'Ausstellungen' },
+  { href: '/contact', label: 'Kontakt' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="nav-header">
+  <div class="container nav-inner">
+    <a href="/" class="logo" aria-label="Veronika Korn – Startseite">
+      <span class="logo-name">Veronika Korn</span>
+      <span class="logo-sub">Malerin · Wien</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links" aria-label="Hauptnavigation">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'nav-link',
+              { active: currentPath === link.href || currentPath.startsWith(link.href + '/') },
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Menü öffnen"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .nav-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    position: relative;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    gap: 0.1rem;
+  }
+
+  .logo-name {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .nav-links {
+    display: none;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    padding-bottom: 0.125rem;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+  }
+
+  .nav-link.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text);
+    transition:
+      transform 0.25s,
+      opacity 0.25s;
+    transform-origin: center;
+  }
+
+  .nav-toggle[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-toggle[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+    .nav-toggle {
+      display: none;
+    }
+  }
+
+  /* Mobile open state */
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    left: -1.5rem;
+    right: -1.5rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .nav-links.open .nav-link {
+    font-size: 0.85rem;
+    padding-bottom: 0.25rem;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = navLinks?.classList.contains('open');
+    navLinks?.classList.toggle('open', !isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Menü öffnen' : 'Menü schließen');
+  });
+</script>
