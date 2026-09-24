@@ -171,11 +171,20 @@ No server restart needed — Nginx serves the files directly.
 
 ## Contact form
 
-The contact form is currently pointed at a [Formspree](https://formspree.io) placeholder. To activate it:
+The static site posts the contact form to `public/api/contact.php`. On the production server, this endpoint uses PHP's `mail()` function to send messages to `florian.korn@outlook.com`.
 
-1. Create a free account at formspree.io
-2. Create a new form and copy your form ID
-3. Open `src/pages/contact.astro` and replace `YOUR_FORM_ID` in the action URL
+### 1) Configure PHP mail
+
+Make sure the hosting provider has PHP mail delivery configured. No Node.js runtime or SMTP environment variables are required for the Astro build.
+
+### 2) Build the static site
+
+```bash
+npm install
+npm run build
+```
+
+Upload the contents of `dist/` to the web root. The upload includes the generated HTML, assets, and `api/contact.php`.
 
 ---
 

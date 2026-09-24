@@ -1,8 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const werk = Astro.url.searchParams.get('werk') ?? '';
-const success = Astro.url.searchParams.get('success') === '1';
 ---
 
 <Layout
@@ -17,114 +15,83 @@ const success = Astro.url.searchParams.get('success') === '1';
   </section>
 
   <section class="contact-section">
-    <div class="container">
-      <div class="contact-grid">
-        <!-- Form -->
-        <div class="form-col">
-          {
-            success && (
-              <div class="success-banner" role="alert">
-                Vielen Dank für Ihre Nachricht. Ich melde mich bald bei Ihnen.
-              </div>
-            )
-          }
-
-          <!-- Replace the action URL with your Formspree endpoint or server-side handler -->
-          <form
-            class="form"
-            method="POST"
-            action="https://formspree.io/f/YOUR_FORM_ID"
-          >
-            <div class="field">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                autocomplete="name"
-                placeholder="Ihr Name"
-              />
-            </div>
-
-            <div class="field">
-              <label for="email">E-Mail</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                autocomplete="email"
-                placeholder="ihre@email.at"
-              />
-            </div>
-
-            <div class="field">
-              <label for="subject">Betreff</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={werk ? `Anfrage: ${werk}` : ''}
-                placeholder="Worum geht es?"
-              />
-            </div>
-
-            <div class="field">
-              <label for="message">Nachricht</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                required
-                placeholder="Ihre Nachricht…"></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit">Nachricht senden</button>
-          </form>
+    <div class="container contact-grid">
+      <div class="form-col">
+        <div class="success-banner" role="alert" id="success-banner" hidden>
+          Vielen Dank für Ihre Nachricht. Ich melde mich bald bei Ihnen.
         </div>
 
-        <!-- Info sidebar -->
-        <aside class="info-col">
-          <div class="info-block">
-            <h2 class="info-label">Direkter Kontakt</h2>
-            <p>
-              <a href="mailto:atelier@vkorn.at" class="accent-link">atelier@vkorn.at</a>
-            </p>
+        <form class="form" method="POST" action="/api/contact.php">
+          <div class="field">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              autocomplete="name"
+              placeholder="Ihr Name"
+            />
           </div>
 
-          <div class="info-block">
-            <h2 class="info-label">Instagram</h2>
-            <p>
-              <a
-                href="https://www.instagram.com/veronik_art_vie/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="accent-link"
-              >
-                @veronik_art_vie
-              </a>
-            </p>
+          <div class="field">
+            <label for="email">E-Mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="ihre@email.at"
+            />
           </div>
 
-          <div class="info-block newsletter">
-            <h2 class="info-label">Newsletter</h2>
-            <p>Neue Werke, Ausstellungen, Ateliermomente — ein- bis zweimal im Monat.</p>
-            <!-- Replace action with your newsletter service endpoint -->
-            <form class="newsletter-form" method="POST" action="#">
-              <input
-                type="email"
-                name="email"
-                placeholder="Ihre E-Mail-Adresse"
-                required
-                class="newsletter-input"
-                aria-label="E-Mail für Newsletter"
-              />
-              <button type="submit" class="newsletter-btn">Anmelden</button>
-            </form>
+          <div class="field">
+            <label for="subject">Betreff</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Worum geht es?"
+            />
           </div>
-        </aside>
+
+          <div class="field">
+            <label for="message">Nachricht</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              placeholder="Ihre Nachricht…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Nachricht senden</button>
+        </form>
       </div>
+
+      <aside class="info-col">
+        <div class="info-block">
+          <h2 class="info-label">E-Mail</h2>
+          <p>
+            <a href="mailto:florian.korn@outlook.com" class="accent-link">florian.korn@outlook.com</a>
+          </p>
+        </div>
+
+        <div class="info-block">
+          <h2 class="info-label">Instagram</h2>
+          <p>
+            <a
+              href="https://www.instagram.com/veronik_art_vie/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="accent-link"
+            >
+              @veronik_art_vie
+            </a>
+          </p>
+        </div>
+      </aside>
     </div>
   </section>
 </Layout>
@@ -154,11 +121,12 @@ const success = Astro.url.searchParams.get('success') === '1';
     display: grid;
     grid-template-columns: 1fr;
     gap: 4rem;
+    max-width: 60rem;
   }
 
   @media (min-width: 768px) {
     .contact-grid {
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 1.6fr 1fr;
       gap: 5rem;
       align-items: start;
     }
@@ -241,7 +209,7 @@ const success = Astro.url.searchParams.get('success') === '1';
   }
 
   .info-block {
-    padding: 1.75rem 0;
+    padding: 1.5rem 0;
     border-bottom: 1px solid var(--border);
   }
 
@@ -274,57 +242,19 @@ const success = Astro.url.searchParams.get('success') === '1';
   .accent-link:hover {
     border-bottom-color: var(--accent);
   }
-
-  .newsletter {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .newsletter p {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-    line-height: 1.7;
-  }
-
-  .newsletter-form {
-    display: flex;
-  }
-
-  .newsletter-input {
-    flex: 1;
-    padding: 0.625rem 0.75rem;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-right: none;
-    color: var(--text);
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    outline: none;
-    min-width: 0;
-    border-radius: 0;
-    -webkit-appearance: none;
-  }
-
-  .newsletter-input:focus {
-    border-color: var(--text);
-  }
-
-  .newsletter-btn {
-    padding: 0.625rem 1rem;
-    background: var(--text);
-    color: var(--bg);
-    border: 1px solid var(--text);
-    font-family: var(--font-sans);
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.25s;
-  }
-
-  .newsletter-btn:hover {
-    background: #3a3a38;
-  }
 </style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const subject = document.getElementById('subject');
+  const successBanner = document.getElementById('success-banner');
+  const work = params.get('werk');
+
+  if (subject instanceof HTMLInputElement && work) {
+    subject.value = `Anfrage: ${work}`;
+  }
+
+  if (successBanner && params.get('success') === '1') {
+    successBanner.hidden = false;
+  }
+</script>

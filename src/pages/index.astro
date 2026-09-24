@@ -19,7 +19,7 @@ const gridWorks = artworks
   <section class="hero">
     {
       heroWork && (
-        <a href={`/works/${heroWork.id}`} class="hero-image-link" aria-label={heroWork.title}>
+        <div class="hero-image-wrap">
           <img
             src={heroWork.image}
             alt={heroWork.title}
@@ -29,21 +29,20 @@ const gridWorks = artworks
             width="1600"
             height="1000"
           />
-        </a>
+          <div class="hero-overlay">
+            <h1 class="hero-name">Veronika Korn</h1>
+            <p class="hero-statement">Ölgemälde aus Wien — Licht, Stille, Augenblicke.</p>
+          </div>
+        </div>
       )
     }
-    <div class="hero-text">
-      <h1 class="hero-name">Veronika Korn</h1>
-      <p class="hero-statement">Ölgemälde aus Wien — Licht, Stille, Augenblicke.</p>
-      <a href="/gallery" class="hero-cta">Werke entdecken</a>
-    </div>
   </section>
 
   <!-- Selected Works -->
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2>Ausgewählte Werke</h2>
+        <h2>Auswahl an Werke</h2>
         <a href="/gallery" class="link-arrow">Alle Werke →</a>
       </div>
       <div class="grid">
@@ -65,22 +64,6 @@ const gridWorks = artworks
     </div>
   </section>
 
-  <!-- Prints Teaser -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Limitierte Drucke</h2>
-        <a href="/prints" class="link-arrow">Alle Drucke →</a>
-      </div>
-      <p class="section-text">
-        Ausgewählte Motive als nummerierte, handsignierte Giclée-Drucke auf Hahnemühle Photo
-        Rag — für alle, die ein Stück mitnehmen möchten.
-      </p>
-      <a href="/prints" class="btn-outline" style="margin-top: 1.5rem; display: inline-block;"
-        >Drucke ansehen</a
-      >
-    </div>
-  </section>
 </Layout>
 
 <style>
@@ -89,9 +72,9 @@ const gridWorks = artworks
     border-bottom: 1px solid var(--border);
   }
 
-  .hero-image-link {
+  .hero-image-wrap {
+    position: relative;
     display: block;
-    overflow: hidden;
   }
 
   .hero-image {
@@ -100,48 +83,37 @@ const gridWorks = artworks
     object-fit: cover;
     object-position: center;
     display: block;
-    transition: transform 0.6s ease;
   }
 
-  .hero-image-link:hover .hero-image {
-    transform: scale(1.015);
-  }
-
-  .hero-text {
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 3.5rem 1.5rem 4rem;
+    padding: 2rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.24));
   }
 
   .hero-name {
     font-family: var(--font-serif);
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.4rem, 6vw, 5rem);
     font-weight: 400;
     letter-spacing: 0.06em;
-    margin-bottom: 0.75rem;
+    color: #fff;
+    margin: 0 0 0.75rem;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
   }
 
   .hero-statement {
-    font-size: clamp(0.85rem, 2vw, 1rem);
-    color: var(--text-muted);
+    font-size: clamp(0.75rem, 1.8vw, 1rem);
+    color: rgba(255, 255, 255, 0.92);
     letter-spacing: 0.08em;
-    margin-bottom: 2rem;
-  }
-
-  .hero-cta {
-    display: inline-block;
-    border: 1px solid var(--text);
-    padding: 0.625rem 1.75rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition:
-      background 0.25s,
-      color 0.25s;
-  }
-
-  .hero-cta:hover {
-    background: var(--text);
-    color: var(--bg);
+    margin: 0;
+    text-transform: none;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
   }
 
   .section {

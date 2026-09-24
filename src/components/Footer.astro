@@ -3,35 +3,6 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="footer-name">Veronika Korn</span>
-      <span class="footer-tagline">Malerin · Wien</span>
-    </div>
-
-    <nav class="footer-nav" aria-label="Footer-Navigation">
-      <a href="/gallery">Werke</a>
-      <a href="/prints">Drucke</a>
-      <a href="/about">Über mich</a>
-      <a href="/exhibitions">Ausstellungen</a>
-      <a href="/contact">Kontakt</a>
-    </nav>
-
-    <div class="footer-social">
-      <a
-        href="https://www.instagram.com/veronik_art_vie/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram von Veronika Korn"
-      >
-        Instagram
-      </a>
-      <a href="mailto:atelier@vkorn.at" aria-label="E-Mail schreiben">
-        atelier@vkorn.at
-      </a>
-    </div>
-  </div>
-
   <div class="container footer-bottom">
     <span>© {year} Veronika Korn. Alle Rechte vorbehalten.</span>
   </div>
@@ -44,83 +15,10 @@ const year = new Date().getFullYear();
     margin-top: auto;
   }
 
-  .footer-inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-  }
-
-  @media (min-width: 640px) {
-    .footer-inner {
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-  }
-
-  @media (min-width: 900px) {
-    .footer-inner {
-      grid-template-columns: 1fr 2fr 1fr;
-      align-items: start;
-    }
-  }
-
-  .footer-name {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .footer-tagline {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .footer-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-  }
-
-  .footer-nav a {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    transition: color 0.2s;
-  }
-
-  .footer-nav a:hover {
-    color: var(--text);
-  }
-
-  .footer-social {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .footer-social a {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    transition: color 0.2s;
-  }
-
-  .footer-social a:hover {
-    color: var(--text);
-  }
-
   .footer-bottom {
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
     font-size: 0.68rem;
     color: var(--text-muted);
     letter-spacing: 0.04em;
+    text-align: center;
   }
 </style>

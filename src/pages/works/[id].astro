@@ -11,6 +11,10 @@ export async function getStaticPaths() {
 
 const { artwork } = Astro.props;
 
+const workIndex = artworks.findIndex((item) => item.id === artwork.id);
+const previousArtwork = workIndex > 0 ? artworks[workIndex - 1] : null;
+const nextArtwork = workIndex >= 0 && workIndex < artworks.length - 1 ? artworks[workIndex + 1] : null;
+
 const isSold = artwork.status === 'sold';
 const isPrint = artwork.category === 'print';
 const dimensions =
@@ -48,6 +52,19 @@ const dimensions =
         <div class="work-info-col">
           <h1 class="work-title">{artwork.title}</h1>
           {artwork.year && <p class="work-year">{artwork.year}</p>}
+
+          <div class="work-nav" aria-label="Vorheriges und nächstes Werk">
+            {previousArtwork ? (
+              <a href={`/works/${previousArtwork.id}`} class="work-nav-link">
+                ← Vorheriges
+              </a>
+            ) : <span class="work-nav-placeholder" aria-hidden="true">← Vorheriges</span>}
+            {nextArtwork ? (
+              <a href={`/works/${nextArtwork.id}`} class="work-nav-link">
+                Nächstes →
+              </a>
+            ) : <span class="work-nav-placeholder" aria-hidden="true">Nächstes →</span>}
+          </div>
 
           <dl class="work-specs">
             {
@@ -157,6 +174,8 @@ const dimensions =
 
   .work-image {
     width: 100%;
+    max-height: 68vh;
+    object-fit: contain;
     display: block;
   }
 
@@ -169,7 +188,30 @@ const dimensions =
   .work-year {
     color: var(--text-muted);
     font-size: 0.875rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .work-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .work-nav-link,
+  .work-nav-placeholder {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .work-nav-link {
+    transition: color 0.2s;
+  }
+
+  .work-nav-link:hover {
+    color: var(--text);
   }
 
   .work-specs {
