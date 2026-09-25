@@ -1,6 +1,6 @@
 <?php
 
-const RECIPIENT = 'florian.korn@outlook.com';
+const RECIPIENT = 'vkorn1962@gmail.com';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
