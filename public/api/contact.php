@@ -33,5 +33,15 @@ if (!mail(RECIPIENT, $cleanSubject, $body, implode("\r\n", $headers))) {
     exit('Die Nachricht konnte nicht gesendet werden.');
 }
 
+$copyBody = "Vielen Dank für Ihre Nachricht. Hier ist eine Kopie Ihrer Anfrage:\n\n$body";
+$copyHeaders = [
+    'From: Veronika Korn <' . RECIPIENT . '>',
+    'Reply-To: ' . RECIPIENT,
+    'Content-Type: text/plain; charset=UTF-8',
+];
+
+// The copy is a courtesy; the request already reached the recipient, so a failure here is ignored.
+mail($email, "Kopie: $cleanSubject", $copyBody, implode("\r\n", $copyHeaders));
+
 header('Location: /contact?success=1', true, 303);
 exit;

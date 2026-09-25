@@ -171,7 +171,7 @@ No server restart needed — Nginx serves the files directly.
 
 ## Contact form
 
-The static site posts the contact form to `public/api/contact.php`. On the production server, this endpoint uses PHP's `mail()` function to send messages to `vkorn1962@gmail.com`.
+The static site posts the contact form to `public/api/contact.php`. On the production server, this endpoint uses PHP's `mail()` function to send messages to `vkorn1962@gmail.com` and a copy to the address the sender entered.
 
 ### 1) Configure PHP mail
 
