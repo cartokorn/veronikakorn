@@ -1,56 +1,52 @@
 [
+    {
+    "year": 2026,
+    "title": "Oberwasser - Wasserturm Favoriten",
+    "type": "Gruppenausstellung",
+    "upcoming": true
+  },{
+    "year": 2026,
+    "title": "Show room 51",
+    "type": "Gruppenausstellung",
+    "upcoming": false
+  },
   {
-    "year": 2024,
-    "title": "Herbst in Öl",
-    "venue": "Galerie am Graben",
-    "location": "Wien",
+    "year": 2025,
+    "title": "Show room 51",
+    "type": "Gruppenausstellung",
+    "upcoming": false
+  },
+  {
+    "year": 2017,
+    "title": "Alte Schieberkammer",
+    "type": "Gruppenausstellung",
+    "upcoming": false
+  },
+  {
+    "year": 2014,
+    "title": "Straßengalerie Arena Nova",
+    "type": "Gruppenausstellung",
+    "upcoming": false
+  },
+  {
+    "year": 2014,
+    "title": "Amateurkunstmessen im Wiener Rathaus",
+    "upcoming": false
+  },
+  {
+    "year": 2013,
+    "title": "Amateurkunstmessen im Wiener Rathaus",
+    "upcoming": false
+  },
+  {
+    "year": 2012,
+    "title": "Amateurkunstmessen im Wiener Rathaus",
+    "upcoming": false
+  },
+  {
+    "year": 2011,
+    "title": "Pensionisten-Wohnhaus Augarten",
     "type": "Einzelausstellung",
-    "upcoming": true,
-    "date": "November 2024"
-  },
-  {
-    "year": 2024,
-    "title": "Wiener Blicke",
-    "venue": "Kunsthaus Wien",
-    "location": "Wien",
-    "type": "Gruppenausstellung",
-    "upcoming": false,
-    "date": "März 2024"
-  },
-  {
-    "year": 2023,
-    "title": "Jahresausstellung der Künstlergilde",
-    "venue": "Künstlerhaus Wien",
-    "location": "Wien",
-    "type": "Gruppenausstellung",
-    "upcoming": false,
-    "date": "Oktober 2023"
-  },
-  {
-    "year": 2022,
-    "title": "Naturmomente",
-    "venue": "Galerie Wolfrum",
-    "location": "Wien",
-    "type": "Gruppenausstellung",
-    "upcoming": false,
-    "date": "September 2022"
-  },
-  {
-    "year": 2021,
-    "title": "Stille Orte",
-    "venue": "Café Leopold",
-    "location": "Wien",
-    "type": "Einzelausstellung",
-    "upcoming": false,
-    "date": "Dezember 2021"
-  },
-  {
-    "year": 2020,
-    "title": "Offen. Atelier.",
-    "venue": "Atelier, 7. Bezirk",
-    "location": "Wien",
-    "type": "Atelierausstellung",
-    "upcoming": false,
-    "date": "November 2020"
+    "upcoming": false
   }
 ]

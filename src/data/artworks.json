@@ -1,7 +1,7 @@
 [
   {
     "id": "herbstwald-2023",
-    "title": "Herbstwald",
+    "title": "1. Herbstwald",
     "year": 2023,
     "technique": "Öl auf Leinwand",
     "width_cm": 80,
@@ -16,14 +16,14 @@
   },
   {
     "id": "stille-am-see-2022",
-    "title": "Stille am See",
+    "title": "2. der Tanz",
     "year": 2022,
-    "technique": "Öl auf Leinwand",
+    "technique": "Acryl auf Leinwand",
     "width_cm": 120,
     "height_cm": 80,
     "price": 2400,
     "currency": "EUR",
-    "status": "sold",
+    "status": "available",
     "category": "original",
     "image": "/images/works/work-02.jpg",
     "description": "Frühmorgens am Neusiedler See. Die Spiegelung des Himmels im stillen Wasser, bevor der Tag beginnt.",
@@ -31,7 +31,7 @@
   },
   {
     "id": "wiener-gasse-2023",
-    "title": "Wiener Gasse",
+    "title": "3. Wiener Gasse",
     "year": 2023,
     "technique": "Öl auf Holz",
     "width_cm": 40,
@@ -46,7 +46,7 @@
   },
   {
     "id": "weinreben-2021",
-    "title": "Weinreben im September",
+    "title": "4. Weinreben im September",
     "year": 2021,
     "technique": "Öl auf Leinwand",
     "width_cm": 100,
@@ -61,7 +61,7 @@
   },
   {
     "id": "sonnenuntergang-prater-2024",
-    "title": "Sonnenuntergang im Prater",
+    "title": "5. Sonnenuntergang im Prater",
     "year": 2024,
     "technique": "Öl auf Leinwand",
     "width_cm": 90,
@@ -76,14 +76,14 @@
   },
   {
     "id": "marktstand-2022",
-    "title": "Marktstand",
+    "title": "6. Marktstand",
     "year": 2022,
     "technique": "Öl auf Leinwand",
     "width_cm": 60,
     "height_cm": 60,
     "price": 1100,
     "currency": "EUR",
-    "status": "sold",
+    "status": "available",
     "category": "original",
     "image": "/images/works/work-06.jpg",
     "description": "Ein Blumenstand am Naschmarkt an einem Samstag. Farbe, Duft, Lärm — eingefangen in öliger Stille.",
@@ -91,7 +91,7 @@
   },
   {
     "id": "abend-am-kanal-2024",
-    "title": "Abend am Kanal",
+    "title": "7.Abend am Kanal",
     "year": 2024,
     "technique": "Öl auf Leinwand",
     "width_cm": 70,
@@ -106,7 +106,7 @@
   },
   {
     "id": "waldweg-2024",
-    "title": "Waldweg",
+    "title": "8. Waldweg",
     "year": 2024,
     "technique": "Öl auf Leinwand",
     "width_cm": 80,
@@ -121,7 +121,7 @@
   },
   {
     "id": "licht-auf-der-terrasse-2024",
-    "title": "Licht auf der Terrasse",
+    "title": "9. Licht auf der Terrasse",
     "year": 2024,
     "technique": "Öl auf Leinwand",
     "width_cm": 60,
@@ -136,7 +136,7 @@
   },
   {
     "id": "print-herbstwald-i",
-    "title": "Herbstwald I (Druck)",
+    "title": "10. Herbstwald I (Druck)",
     "year": 2023,
     "technique": "Giclée-Druck auf Hahnemühle Photo Rag",
     "width_cm": 40,
@@ -152,7 +152,7 @@
   },
   {
     "id": "print-weinreben-i",
-    "title": "Weinreben I (Druck)",
+    "title": "11. Weinreben I (Druck)",
     "year": 2021,
     "technique": "Giclée-Druck auf Hahnemühle Photo Rag",
     "width_cm": 50,

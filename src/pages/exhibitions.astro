@@ -33,10 +33,12 @@ const past = exhibitions
                   <span class="item-date">{ex.date ?? ex.year}</span>
                   <div class="item-info">
                     <strong class="item-title">{ex.title}</strong>
-                    <span class="item-venue">
-                      {ex.venue}, {ex.location}
-                    </span>
-                    <span class="item-type">{ex.type}</span>
+                    {ex.venue && (
+                      <span class="item-venue">
+                        {[ex.venue, ex.location].filter(Boolean).join(', ')}
+                      </span>
+                    )}
+                    {ex.type && <span class="item-type">{ex.type}</span>}
                   </div>
                 </li>
               ))}
@@ -54,10 +56,12 @@ const past = exhibitions
                 <span class="item-date">{ex.date ?? ex.year}</span>
                 <div class="item-info">
                   <strong class="item-title">{ex.title}</strong>
-                  <span class="item-venue">
-                    {ex.venue}, {ex.location}
-                  </span>
-                  <span class="item-type">{ex.type}</span>
+                  {ex.venue && (
+                    <span class="item-venue">
+                      {[ex.venue, ex.location].filter(Boolean).join(', ')}
+                    </span>
+                  )}
+                  {ex.type && <span class="item-type">{ex.type}</span>}
                 </div>
               </li>
             ))
