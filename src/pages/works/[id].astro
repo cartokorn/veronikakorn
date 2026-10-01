@@ -91,18 +91,8 @@ const dimensions =
                 </>
               )
             }
-            {
-              artwork.price && artwork.currency && (
-                <>
-                  <dt>Preis</dt>
-                  <dd>
-                    {isSold
-                      ? 'Verkauft'
-                      : `${artwork.currency} ${artwork.price.toLocaleString('de-AT')}`}
-                  </dd>
-                </>
-              )
-            }
+            <dt>Preis</dt>
+            <dd>Auf Anfrage</dd>
             <dt>Status</dt>
             <dd class:list={['status', { sold: isSold, available: !isSold }]}>
               {isSold ? 'Verkauft' : 'Verfügbar'}

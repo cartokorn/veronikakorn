@@ -45,13 +45,6 @@ const isPrint = artwork.category === 'print';
         {[artwork.year, artwork.technique].filter(Boolean).join(' · ')}
       </p>
     )}
-    <p class="card-price">
-      {isSold
-        ? 'Verkauft'
-        : artwork.price && artwork.currency
-          ? `${artwork.currency} ${artwork.price.toLocaleString('de-AT')}`
-          : ''}
-    </p>
   </div>
 </a>
 
@@ -119,11 +112,5 @@ const isPrint = artwork.category === 'print';
     color: var(--text-muted);
     margin-bottom: 0.3rem;
     line-height: 1.4;
-  }
-
-  .card-price {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    font-weight: 400;
   }
 </style>
